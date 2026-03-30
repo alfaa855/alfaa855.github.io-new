@@ -1,99 +1,166 @@
+html{ scroll-behavior: smooth;}
+
+:root { 
+  --bg: #021826;
+  --grid: #FFFFFF;
+  --line: rgba(250,250,250,0.1);
+  --cbutton: #0B2533;
+  --text: #FFFFFF;
+  --sub: #BFBFB4;
+}
 *{
   margin: 0;
-  padding: 0;
+  padding:0;
 }
 
-html,body{
+body{
+  display: flex;
+  font-family: "times new roman", sans-serif;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   position: fixed;
-  height: 100%;
-  width: 100%;
 }
+
+/*bintang kecil*/
+.main::before{
+  position: absolute;
+  content: '';
+  background: radial-gradient(circle, var(--line) 1px, transparent 1px);
+  min-width: 100%;
+  height: 100%;
+  inset:0;
+}
+/*garis dan background*/
 .main{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, var(--line), transparent 1px, transparent 90px), repeating-linear-gradient(180deg, var(--line), transparent 1px,transparent 90px) var(--bg);
+  
+}
+
+.title{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 200px;
+  animation: 3s geser linear 0s 1 normal;
+}
+
+.in-title{
+  font-size: 100px;
+  color: var(--text);
+}
+
+.subtitle{
+  display: flex;
+  position: absolute;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 80px;
+  color: var(--sub);
+  animation: 4s geser linear 0s 1 normal;
+}
+
+.bbtn{
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   width: 100vw;
-  height:100vh;
-  min-height: -webkit-fill-available;
-  background: #ab41d1;
-  background: linear-gradient(1deg, rgba(171, 65, 209, 1) 10%, rgba(181, 49, 214, 1) 19%, rgba(61, 174, 196, 1) 100%);
-  row-gap: 45px;
+  height: 100vh;
+  border: none;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--grid) 20%, transparent, var(--bg), transparent );
+  box-shadow: 0px, 0px, 10px 10px;
+  position: relative;
+  z-index: 0;
+}
+.btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  position: absolute;
+  animation: 5.5s swipe ease-in 0s 1 normal;
+  z-index: 0;
+}
+/*efek di belakang tombol*/
+.btn::after{
+  display: flex;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  content: '';
+  position: absolute;
+  padding:  28px 92px;
+  z-index: -1 ;
+  border-radius: 20px;
+  animation: 2s bgbtn ease 0s infinite forward;
 }
 
 a {
   text-decoration: none;
 }
-
-.navbar{
+.in-btn{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-}
-
-.icon{ 
-  width: auto;
-  height: auto;
-}
-/*pengendali tulisan website*/
-.logo{
-  font-family: "times new roman";
-  text-align: center;
-  height: 90px;
-  color: white;
-  font-size: clamp(24px,8vw,72px);
-}
-/*ini adalah pengendali tombol div*/
-.button {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-}
-/*ini adalah pengendali button*/
-.in{
   font-family: "times new roman", sans-serif;
-  width: 180px;
-  height: 50px;
+  padding: 15px 60px;
   border-radius: 20px;
-  font-size:20px;
-  border: none;
-  cursor: pointer;
+  font-size: 20px;
   position: relative;
-  transition: all 1s cubic-bezier(0.5, 1, 1, 0.5);
-  box-shadow: 0px 0px 10px 6px #B531D6;
-  z-index: 0;
+  transition: all 0.3s ease-in;
+  z-index:0;
+  border: none;
 }
 
-.in::before {
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  content:'';
+.in-btn::before{
+  position: absolute;
   opacity:0;
+  z-index: -1;
+  content:'';
+  inset: 0;
   border-radius: 20px;
-  background: linear-gradient(rgba(181, 49, 214, 1) 100%, rgba(171, 65, 209, 1) 30%);
-  transition: all 1s cubic-bezier(0.5, 1, 1, 0.5);
-  
+  background: var(--cbutton);
+  transition: all 0.3s ease-in;
 }
 
-.in:hover::before{
-  opacity:1;
+.in-btn:hover::before{
+  opacity: 1;
 }
 
-/*untuk hp*/
-@media(orientation:portrait){
-  .logo{
-    font-size:clamp(24px,7vw,48px);
-  }}
-/*untuk desktop*/
-  @media(orientation:landscape){
-    .logo{
-      font-size: clamp(24px,8vw,72px);
-    }
+@keyframes swipe {
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes geser {
+  from{opacity: 0; transform: translateX(300px)}
+  to{ opacity: 1; transform: translate(0px)}
+}
+
+
+@media (orientation: portrait){
+  .in-title{
+    font-size: 50px;
   }
   
+  .subtitle{
+    font-size: 15px;
+    margin-bottom: 135px;
+  }
+  
+  
+}
 
   
